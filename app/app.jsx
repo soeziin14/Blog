@@ -1,14 +1,24 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var {Route, Router, IndexRoute, hashHistory} = require('react-router');
+var React         = require('react'),
+    ReactDOM      = require('react-dom'),
+    {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
+var Main         = require('Main'),
+    BlogIndex    = require('BlogIndex'),
+    NewBlog      = require('NewBlog'),
+    Login        = require('Login');
 // Load foundation
-$(document).foundation();1
-
+$(document).foundation();
 // App css
 require('style!css!sass!applicationStyles')
 
+hashHistory.push('blog');
 ReactDOM.render(
-  <p>Boilerplate 3 Project</p>,
-  document.getElementById('app')
+    <Router history={hashHistory}>
+        <Route path="/" component={Main}>
+            <Route path="/login" component={Login}></Route>
+            <Route path="/blog" component={BlogIndex}></Route>
+                <Route path="/blog/new" component={NewBlog}></Route>
+        </Route>
+    </Router>,
+    document.getElementById('app')
 );

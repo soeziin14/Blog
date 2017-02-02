@@ -1,8 +1,13 @@
-var express = require('express');
+var express     = require('express'),
+    path        = require('path'),
+    bodyParser  = require('body-parser');
+var blogs       = require('./routes/blogs.js');
 
 // Create our app
 var app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(express.static(__dirname+'/public'));
 
 app.use(function (req, res, next){
   if (req.headers['x-forwarded-proto'] === 'https') {
@@ -11,9 +16,12 @@ app.use(function (req, res, next){
     next();
   }
 });
+app.get('*', function (request, response){
+    response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+})
+app.use(bodyParser.json());
 
-app.use(express.static('public'));
-
+//app.use('/blog', blogs);
 app.listen(PORT, function () {
   console.log('Express server is up on port ' + PORT);
 });

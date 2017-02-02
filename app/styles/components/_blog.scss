@@ -1,0 +1,41 @@
+.blog-header{
+    font-size: $blog-header-size;
+    margin: 2rem 0;
+    text-align: center;
+}
+.blog-panel{
+    text-align: center;
+    width: 100%;
+}
+
+.blog-form{
+    .blog-header{
+        input[type=text]{
+            height: 5.5rem;
+            font-size: 40px;
+            text-align: center;
+        }
+    }
+    hr{
+        border-bottom: 10px solid #4fe2bd;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+.new-button{
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    float: right;
+    button{
+        height:100%;
+        width: 100%;
+    }
+}
+
+.imgPreview{
+    text-align: center;
+    img{
+        max-height: 500px;
+    }
+}
