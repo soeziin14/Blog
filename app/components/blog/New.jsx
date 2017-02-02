@@ -7,7 +7,10 @@ class NewBlog extends React.Component{
         super(props);
         this.state = {
             activeTab: 1,
+            imageComponents: [],
             images: [],
+            bodyComponents: [],
+            bodies: [],
         }
     }
     newBody = () => {
@@ -17,10 +20,48 @@ class NewBlog extends React.Component{
         $(this.refs.container).append(content);
     }
     newImage = () => {
-        const images = this.state.images;
+        const {imageComponents, images} = this.state;
         this.setState({
-            images: images.concat(<ImageUpload key={images.length}></ImageUpload>),
-        })
+            imageComponents: imageComponents.concat(<ImageUpload id={imageComponents ? imageComponents.length+1 : 1}
+                                                                 images={images}
+                                                                 onNewImage={this.handleNewImage}
+                                                                 key={imageComponents.length}
+                                                    ></ImageUpload>),
+        });
+    }
+    handleNewImage = (id, file, url) => {
+        var updated = {
+            id: id,
+            file: file,
+            url: url,
+        }
+        console.log(id, this.state.images.length);
+        var arr = [];
+        if(this.state.images.length < id){
+            this.state.images.forEach(function(el){
+                arr[el.id] = el;
+            })
+            console.log("before:",arr);
+            arr = arr.push(updated);
+            console.log("after:",arr);
+            this.setState({
+                images: arr,
+            })
+        }
+        else{
+            this.state.images.forEach(function(el){
+                if(el.id === key){
+                    arr[id] = updated;
+                }
+                else{
+                    arr[el.id] = el;
+                }
+            })
+            this.setState({
+                images: arr,
+            });
+        }
+        console.log('???',this.state.images);
     }
     handleToggleTab = (activeTab) => {
         this.setState = () => ({
@@ -45,7 +86,7 @@ class NewBlog extends React.Component{
                         <textarea name="" id="" cols="30" rows="10"></textarea>
                     </div>
                     <div>
-                        {this.state.images.map(function(input, index){
+                        {this.state.imageComponents.map(function(input, index){
                             return input;
                         })}
                     </div>

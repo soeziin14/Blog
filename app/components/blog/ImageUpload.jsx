@@ -3,7 +3,6 @@ var React          = require('react');
 class ImageUpload extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {file: '',imagePreviewUrl: ''};
   }
 
   _handleSubmit(e) {
@@ -12,24 +11,22 @@ class ImageUpload extends React.Component {
     console.log('handle uploading-', this.state.file);
   }
 
-  _handleImageChange(e) {
+  handleNewImage(e) {
     e.preventDefault();
 
     let reader = new FileReader();
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
-      });
+        this.props.onNewImage(this.props.id, file, reader.result);
     }
 
     reader.readAsDataURL(file)
   }
 
   render() {
-    let {imagePreviewUrl} = this.state;
+      console.log("in:", this.props);
+    let imagePreviewUrl = this.props.imagePreviewUrl;
     let $imagePreview = null;
     if (imagePreviewUrl) {
       $imagePreview = (<img src={imagePreviewUrl} />);
@@ -40,7 +37,7 @@ class ImageUpload extends React.Component {
     return (
       <div className="previewComponent">
         <form onSubmit={(e)=>this._handleSubmit(e)}>
-          <input className="fileInput" type="file" onChange={(e)=>this._handleImageChange(e)} />
+          <input className="fileInput" type="file" onChange={(e)=>this.handleNewImage(e)} />
           <button className="submitButton" type="submit" onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
         </form>
         <div className="imgPreview">
@@ -49,5 +46,8 @@ class ImageUpload extends React.Component {
       </div>
     )
   }
+}
+ImageUpload.defaultProps = {
+    images : {file: '',imagePreviewUrl: ''},
 }
 module.exports = ImageUpload;
