@@ -1,12 +1,13 @@
-var React         = require('react');
-var Tabs          = require('Tabs'),
+var React         = require('react'),
+    {hashHistory} = require('react-router');
+var TextArea      = require('TextArea'),
     ImageUpload   = require('ImageUpload');
 
 class NewBlog extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            activeTab: 1,
+            id: 1,
             imageComponents: [],
             images: [],
             bodyComponents: [],
@@ -14,15 +15,21 @@ class NewBlog extends React.Component{
         }
     }
     newBody = () => {
-        var content = $('<div className="column small-6 large-6 text-center"></div>'+
-                        '<textarea name="" id="" cols="30" rows="10"></textarea>'+
-                        '<hr />');
-        $(this.refs.container).append(content);
+        // var content = $('<div className="column small-6 large-6 text-center"></div>'+
+        //                 '<textarea name="" id="" cols="30" rows="10"></textarea>'+
+        //                 '<hr />');
+        //$(this.refs.container).append(content);
+        const {imageComponents, id} = this.state;
+        this.setState({
+            imageComponents: imageComponents.concat(<TextArea key={imageComponents.length}></TextArea>),
+            id: id+1,
+        })
+        console.log(this.state.id);
     }
     newImage = () => {
-        const {imageComponents, images} = this.state;
+        const {imageComponents, images, id} = this.state;
         this.setState({
-            imageComponents: imageComponents.concat(<ImageUpload id={imageComponents ? imageComponents.length+1 : 1}
+            imageComponents: imageComponents.concat(<ImageUpload id={imageComponents.length + 1}
                                                                  images={images}
                                                                  onNewImage={this.handleNewImage}
                                                                  key={imageComponents.length}
@@ -38,19 +45,15 @@ class NewBlog extends React.Component{
         console.log(id, this.state.images.length);
         var arr = [];
         if(this.state.images.length < id){
-            this.state.images.forEach(function(el){
-                arr[el.id] = el;
-            })
-            console.log("before:",arr);
-            arr = arr.push(updated);
-            console.log("after:",arr);
+            arr = this.state.images.slice();
+            arr.push(updated);
             this.setState({
                 images: arr,
             })
         }
         else{
             this.state.images.forEach(function(el){
-                if(el.id === key){
+                if(el.id === id){
                     arr[id] = updated;
                 }
                 else{
@@ -61,7 +64,7 @@ class NewBlog extends React.Component{
                 images: arr,
             });
         }
-        console.log('???',this.state.images);
+        console.log('???',this.state.images, this.state.images.length);
     }
     handleToggleTab = (activeTab) => {
         this.setState = () => ({
@@ -69,12 +72,16 @@ class NewBlog extends React.Component{
         });
 
     }
+    onSubmit = () => {
+        //make post request
+        hashHistory.push('/');
+    }
     render(){
         var today = new Date().toISOString().slice(0, 10).replace(/-/g,"-");
         var {activeTab} = this.state;
 
         return(
-            <div>
+            <form onSubmit={this.onSubmit}>
                 <div className="row blog-form" ref="container">
                     <div className="column small-12 large-12 text-center blog-header">
                         <h1>New Blog @ {today}</h1>
@@ -93,10 +100,11 @@ class NewBlog extends React.Component{
                     <hr/>
                 </div>
                 <div className="new-button">
-                    <button onClick={this.newBody}>Body</button>
-                    <button onClick={this.newImage}>Image</button>
+                    <button type="button" onClick={this.newBody}>Body</button>
+                    <button type="button" onClick={this.newImage}>Image</button>
                 </div>
-            </div>
+                <button type="submit">Let's go</button>
+            </form>
         )
     }
 }

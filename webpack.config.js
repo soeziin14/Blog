@@ -30,7 +30,7 @@ module.exports = {
         Login: 'app/components/login/Login.jsx',
         AuthService: 'app/auth/AuthService.js',
         applicationStyles: 'app/styles/app.scss',
-        Tabs: 'app/components/blog/Tabs.jsx',
+        TextArea: 'app/components/blog/TextArea.jsx',
         ImageUpload: 'app/components/blog/ImageUpload.jsx',
     },
     extensions: ['', '.js', '.jsx']
