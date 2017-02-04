@@ -7,24 +7,17 @@ class ImageUpload extends React.Component {
         imagePreviewUrl: '',
     }
   }
-
-  _handleSubmit(e) {
-    e.preventDefault();
-    // TODO: do something with -> this.state.file
-    console.log('handle uploading-', this.state.file);
-  }
-
-  handleNewImage(e) {
+  handleChangeImage(e) {
     e.preventDefault();
 
     let reader = new FileReader();
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-        this.props.onNewImage(this.props.id, file, reader.result);
+        this.props.onChangeImageBlock(this.props.id, file, reader.result);
         this.setState({
             imagePreviewUrl: reader.result,
-        })
+        });
     }
     if(file){
         reader.readAsDataURL(file);
@@ -32,19 +25,14 @@ class ImageUpload extends React.Component {
   }
 
   render() {
-    let imagePreviewUrl = this.state.imagePreviewUrl;
-    let $imagePreview = null;
-    if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} />);
-    } else {
-      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
-    }
+
+    var imagePreviewUrl = this.state ? this.state.imagePreviewUrl : null;
+    var $imagePreview = imagePreviewUrl ? (<img src={imagePreviewUrl} />) : (<div className="previewText">Please select an Image for Preview</div>);
 
     return (
         <div className="previewComponent">
-            <div onSubmit={(e)=>this._handleSubmit(e)}>
-              <input className="fileInput" type="file" onChange={(e)=>this.handleNewImage(e)} />
-              <button className="submitButton" type="submit" onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
+            <div>
+              <input className="fileInput" type="file" onChange={(e)=>this.handleChangeImage(e)} />
             </div>
             <div className="imgPreview">
                 {$imagePreview}
