@@ -1,7 +1,9 @@
 var express         = require('express'),
     router          = express.Router();
-    //blogsController = require(./blogsController);
+    blogsController = require('./blogsController');
 
 router
     .route('/new')
-    //.post(blogsController.new);
+    .post(blogsController.new);
+
+module.exports = router;

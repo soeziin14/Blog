@@ -1,1 +1,3 @@
 node_modules/
+api/aws.js
+npm-debug.log
