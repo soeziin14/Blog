@@ -10,6 +10,7 @@ var Main         = require('Main'),
 $(document).foundation();
 // App css
 require('style!css!sass!applicationStyles')
+//require('script!Foundation')
 
 hashHistory.push('blog');
 ReactDOM.render(

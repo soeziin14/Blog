@@ -32,6 +32,7 @@ module.exports = {
         applicationStyles: 'app/styles/app.scss',
         TextArea: 'app/components/blog/TextArea.jsx',
         ImageUpload: 'app/components/blog/ImageUpload.jsx',
+        //Foundation: '../node_modules/foundation-sites/dist/foundation.min.js'
     },
     extensions: ['', '.js', '.jsx']
   },
