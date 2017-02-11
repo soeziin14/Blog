@@ -1,6 +1,10 @@
 var AWS         = require('aws-sdk'),
     aws         = require('../api/aws');
 
+//give client top n blogs
+module.exports.getRecentBlogs = function(req, res){
+    
+}
 module.exports.getSignedAWSUrl = function(req, res){
     var {filename, filetype} = req.query;
     AWS.config.update({
