@@ -94,6 +94,7 @@ class NewBlog extends React.Component{
                               'Content-Type': el.file.type
                             }
                           };
+                          console.log("Putting:", el.file);
                           return axios.put(signedUrl, el.file, options);
                         })
                         .then(function (result) {

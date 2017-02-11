@@ -11,4 +11,8 @@ router
     .route('/new')
     .post(blogsController.new);
 
+router
+    .route('/getRecentBlogs')
+    .get(blogsController.getRecentBlogs);
+    
 module.exports = router;
