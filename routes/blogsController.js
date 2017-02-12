@@ -34,12 +34,16 @@ module.exports.new = function(req, res){
         secretAccessKey: aws.SECRET_KEY,
     });
     var form = [];
+    var mainImage;
     //    console.log("title: ", form.title);
     //    console.log("intro: ", form.intro);
     //    console.log("data: ", req.body.componentData);
     req.body.data.forEach(function(data){
         if(data){
             form.push(data.value);
+            if(data.type === "image" && !mainImage){
+                mainImage = data.value;
+            }
         }
     });
     var table       = "Blog";
