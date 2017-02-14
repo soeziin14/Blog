@@ -80,35 +80,30 @@ class NewBlog extends React.Component{
                 componentData.forEach(function(el, i){
                     console.log("how many data?", el, i);
                     if(el.type == 'image'){
-                        axios.get('/blogs/getSignedAWSUrl', {
+                        axios.get('/blogs/aws/getSignedAWSUrl', {
                             params: {
                                 filename: el.file.name,
                                 filetype: el.file.type
                             }
                         })
                         .then(function (result) {
-                            //AWS s3 signed url returned from server.
-                          var signedUrl = result.data.signedUrl;
-                          var options = {
-                            headers: {
-                              'Content-Type': el.file.type
-                            }
-                          };
-                          return axios.put(signedUrl, el.file, options);
+                              //AWS s3 signed url returned from server.
+                              var signedUrl = result.data.signedUrl;
+                              console.log("Signed URl:", signedUrl);
+                              var options = {
+                                headers: {
+                                  'Content-Type': el.file.type,
+                                }
+                              };
+                              axios.put(signedUrl, el.file, options);
                         })
-                        .then(function (result) {
-                            //AWS s3 upload success.
-                        })
-                        .catch(function (err) {
-                          //AWS s3 upload failure. don't create new blog? for now.
-                          return;
-                        });
                     }
                 });
             }
         );
         imageUploadPromise.then(
-            (function(val){
+            (function(result){
+                console.log("succes???:", result);
                 axios.post('/blogs/new', form)
                     .then(function(response){
                         console.log("new blog success:", response);

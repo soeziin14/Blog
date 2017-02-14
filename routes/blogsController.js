@@ -4,6 +4,7 @@ var AWS         = require('aws-sdk'),
 module.exports.getSignedAWSUrl = function(req, res){
     var {filename, filetype} = req.query;
     AWS.config.update({
+        endpoint: "s3.amazonaws.com",
         accessKeyId: aws.ACCESS_KEY,
         secretAccessKey: aws.SECRET_KEY,
     });
@@ -13,6 +14,7 @@ module.exports.getSignedAWSUrl = function(req, res){
         Key: filename,
         Expires: 60,
         ContentType: filetype,
+        ACL: 'public-read',
     };
 
     bucket.getSignedUrl('putObject', params, function(err, data){
@@ -34,7 +36,7 @@ module.exports.new = function(req, res){
         secretAccessKey: aws.SECRET_KEY,
     });
     var form = [];
-    var mainImage;
+    var mainImage = "";
     //    console.log("title: ", form.title);
     //    console.log("intro: ", form.intro);
     //    console.log("data: ", req.body.componentData);
@@ -59,6 +61,7 @@ module.exports.new = function(req, res){
            UpdateExpression:
                              "set title = if_not_exists(title, :title),"+
                              "intro = if_not_exists(intro, :intro),"+
+                             "mainImage = if_not_exists(mainImage, :mainImage),"+
                              "#componentData = if_not_exists(componentData, :componentData)",
            ExpressionAttributeNames:{
                "#componentData": "componentData",
@@ -66,6 +69,7 @@ module.exports.new = function(req, res){
            ExpressionAttributeValues: {
                ":title": req.body.title,
                ":intro": req.body.intro,
+               ":mainImage": mainImage,
                ":componentData": docClient.createSet(form),
            }
        };
@@ -76,4 +80,36 @@ module.exports.new = function(req, res){
                res.status(200).send(JSON.stringify(data, null, 2));
            }
        });
+}
+//give client top n blogs
+module.exports.getRecentBlogs = function(req, res){
+
+    AWS.config.update({
+        region: "us-east-1",
+        endpoint: "dynamodb.us-east-1.amazonaws.com",
+        accessKeyId: aws.ACCESS_KEY,
+        secretAccessKey: aws.SECRET_KEY,
+    });
+    var table       = "Blog";
+    var author      = "Jin Song";
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var params = {
+        TableName:table,
+        KeyConditionExpression: "#author = :author",
+        ExpressionAttributeNames:{
+            "#author": "author"
+        },
+        ExpressionAttributeValues: {
+            ":author": author,
+        },
+        Limit: 10,
+    };
+   docClient.query(params, function(err, data) {
+       if (err) {
+           console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+       } else {
+           console.log("Query succeeded.", data.Items);
+           res.status(200).send({data: data.Items});
+       }
+   });
 }
