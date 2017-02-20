@@ -5,6 +5,7 @@ var React         = require('react'),
 var Main         = require('Main'),
     BlogIndex    = require('BlogIndex'),
     NewBlog      = require('NewBlog'),
+    ShowBlog     = require('ShowBlog'),
     Login        = require('Login');
 // Load foundation
 $(document).foundation();
@@ -19,6 +20,7 @@ ReactDOM.render(
             <Route path="/login" component={Login}></Route>
             <Route path="/blog" component={BlogIndex}></Route>
                 <Route path="/blog/new" component={NewBlog}></Route>
+                <Route path="/blog/show/:id" component={ShowBlog}></Route>
         </Route>
     </Router>,
     document.getElementById('app')
