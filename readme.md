@@ -28,6 +28,7 @@ This is peronsal project to try to touch upon all the hot & modern web developme
 
  - Full CRUD ? This is a maybe, since I personally don't need it.
  - Refactor AWS.configure & some repetitive client-side url fetching (ex. AWS Signed URl fetch)
+ - Create Local Secondary Index for sepearte Blog fetches (index page & show page).
  - Deploy onto Heroku (but first better UI)
  - Add actual Blog Post.
 
