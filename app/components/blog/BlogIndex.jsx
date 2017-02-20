@@ -1,6 +1,6 @@
 var React         = require('react'),
     axios         = require('axios'),
-    {Link, IndexLink} = require('react-router');
+    {Link, IndexLink, hashHistory, router} = require('react-router');
 
 class BlogIndex extends React.Component{
     constructor(props){
@@ -29,6 +29,15 @@ class BlogIndex extends React.Component{
         var url = "https://s3.amazonaws.com/jinblog/" + key;
         return url;
     }
+    // handleGetBlog = (index, e) => {
+    //     console.log(index ,e);
+    //     //hashHistory.push('/blog/show/'+index);
+    //     hashHistory.push('/blog/show/'+index);
+    //     // this.context.router.push({
+    //     //     pathname: '/blog/show',
+    //     //     state: this.state.blogs[index],
+    //     // })
+    // }
     populateBlogsComponents = () => {
        var {blogs, components} = this.state;
        var that = this;
@@ -49,7 +58,9 @@ class BlogIndex extends React.Component{
                                {mainImageComponent}
                            </div>
                            <div className="columns large-12 panel-child">
-                               <p>{el.intro}</p>
+                               <Link to={"/blog/show/"+el.timestamp} activeClassName="active-link">
+                                   <p>{el.intro}</p>
+                               </Link>
                            </div>
                        </div>
                        <hr/>

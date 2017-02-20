@@ -7,7 +7,7 @@
     "test": "karma start",
     "start": "node server.js"
   },
-  "author": "Andrew Mead",
+  "author": "Jin Song",
   "license": "MIT",
   "dependencies": {
     "auth0-lock": "^10.11.0",

@@ -27,6 +27,7 @@ module.exports = {
         Navigation: 'app/components/Navigation.jsx',
         BlogIndex: 'app/components/blog/BlogIndex.jsx',
         NewBlog: 'app/components/blog/new',
+        ShowBlog: 'app/components/blog/ShowBlog.jsx',
         Login: 'app/components/login/Login.jsx',
         AuthService: 'app/auth/AuthService.js',
         applicationStyles: 'app/styles/app.scss',

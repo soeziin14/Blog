@@ -1,6 +1,68 @@
 var AWS         = require('aws-sdk'),
     aws         = require('../api/aws');
 
+//yes it is horrendous in many ways. just something very simple for the sake of it.
+//let's bring in auth0 in the future.
+module.exports.login = function(req, res){
+
+    var {username, password} = req.query;
+    AWS.config.update({
+        region: "us-east-1",
+        endpoint: "dynamodb.us-east-1.amazonaws.com",
+        accessKeyId: aws.ACCESS_KEY,
+        secretAccessKey: aws.SECRET_KEY,
+    });
+    var table       = "User";
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var params = {
+        TableName:table,
+        KeyConditionExpression: "id = :id",
+        ExpressionAttributeValues: {
+            ":id": username,
+        },
+    };
+   docClient.query(params, function(err, data) {
+       if (err) {
+           console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+       } else {
+           console.log("Query succeeded.", data.Items);
+           res.status(200).send({data: data.Items});
+       }
+   });
+}
+module.exports.getBlog = function(req, res){
+    var timestamp = Number(req.params.id);
+console.log("getblog????", timestamp);
+    AWS.config.update({
+        region: "us-east-1",
+        endpoint: "dynamodb.us-east-1.amazonaws.com",
+        accessKeyId: aws.ACCESS_KEY,
+        secretAccessKey: aws.SECRET_KEY,
+    });
+    var table       = "Blog";
+    var author      = "Jin Song";
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var params = {
+        TableName:table,
+        KeyConditionExpression: "#author = :author AND #timestamp = :timestamp",
+        ExpressionAttributeNames:{
+            "#author": "author",
+            "#timestamp": "timestamp"
+        },
+        ExpressionAttributeValues: {
+            ":author": author,
+            ":timestamp": timestamp,
+        },
+    };
+   docClient.query(params, function(err, data) {
+       if (err) {
+           console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+       } else {
+           console.log("Get blog succeeded.", data);
+           res.status(200).send(data.Items[0]);
+       }
+   });
+}
 module.exports.getSignedAWSUrl = function(req, res){
     var {filename, filetype} = req.query;
     AWS.config.update({
