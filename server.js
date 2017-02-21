@@ -5,7 +5,11 @@ var blogs       = require('./routes/blogs.js');
 
 // Create our app
 var app = express();
-const PORT = process.env.PORT || 3000;
+//const PORT = process.env.PORT || 3000;
+
+app.listen(process.env.PORT || 3000, function () {
+  console.log('Express server is up on port ' + PORT);
+});
 
 app.use(express.static(__dirname+'/public'));
 
@@ -34,6 +38,3 @@ app.use('/blogs', blogs);
 app.get('*', function (request, response){
     response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 })
-app.listen(PORT, function () {
-  console.log('Express server is up on port ' + PORT);
-});
