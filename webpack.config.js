@@ -23,6 +23,7 @@ module.exports = {
   resolve: {
     root: __dirname,
     alias: {
+        About: 'app/components/About.jsx',
         Main: 'app/components/Main.jsx',
         Navigation: 'app/components/Navigation.jsx',
         BlogIndex: 'app/components/blog/BlogIndex.jsx',
@@ -47,8 +48,10 @@ module.exports = {
             test: /\.jsx?$/,
             exclude: /(node_modules|bower_components)/
         },
-        { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-        { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
+        {
+          test: /\.(png|jpg)$/,
+          loader: 'url?limit=25000'
+        }
     ]
   },
   sassLoader: {

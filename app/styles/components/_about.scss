@@ -1,0 +1,49 @@
+p{
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 1.25rem;
+}
+header{
+    text-align: center;
+    .header{
+        margin-top: 50px;
+    }
+    .intro-text{
+        padding-top: 7.5%;
+    }
+    background-color: antiquewhite;
+    h1{
+        font-weight: bold;
+    }
+    h2{
+        font-weight: bold;
+    }
+    span{
+        font-family: "Open Sans", sans-serif;
+    }
+}
+.feature{
+    .img-responsive{
+        text-align: center;
+        img{
+            max-width: 400px;
+        }
+    }
+    .description{
+        padding-top: 7.5%;
+        h1{
+            font-style: bold;
+        }
+    }
+}
+.section-title{
+    font-family: 'Droid Sans', sans-serif;
+    font-weight: bold;
+}
+.color-block{
+    padding: 0;
+    background-color: lightseagreen;
+}
+hr-no-padding{
+    margin-bottom: 0;
+}
