@@ -42,15 +42,17 @@ class BlogIndex extends React.Component{
        var {blogs, components} = this.state;
        var that = this;
        blogs.data.forEach(function(el){
+           var formattedTime = new Date(el.timestamp).toDateString();
            var mainImage = that.fetchImageFromS3(el.mainImage);
            var mainImageComponent = mainImage !== "" ? <img src={mainImage} alt="" className="src"/> :
                                             <img src="http://www.immersion-3d.com/wp-content/uploads/2015/12/image-placeholder-500x500.jpg" alt=""/>;
            that.setState({
                components: that.state.components.concat(
                    <div key={that.state.components.length}>
-                       <div className="row">
+                       <div className="row blog-title">
                            <div className="columns small-12-collapse medium-12-collapse large-12-collpase">
                                <h3>{el.title}</h3>
+                               <h5 className="subheader">by Jin @ {formattedTime}</h5>
                            </div>
                        </div>
                        <div className="row blog-panel">
@@ -58,9 +60,12 @@ class BlogIndex extends React.Component{
                                {mainImageComponent}
                            </div>
                            <div className="columns large-12 panel-child">
-                               <Link to={"/blog/show/"+el.timestamp} activeClassName="active-link">
-                                   <p>{el.intro}</p>
-                               </Link>
+                               <p>{el.intro}</p>
+                               <div className="blog-more">
+                                   <Link to={"/blog/show/"+el.timestamp} activeClassName="active-link">
+                                   Continue Reading...
+                                   </Link>
+                               </div>
                            </div>
                        </div>
                        <hr/>
@@ -76,34 +81,36 @@ class BlogIndex extends React.Component{
     render(){
         return(
             <div>
-               <div className="top-bar-right">
-                   <ul className="menu">
-                       <li className="menu-text">
-                           <Link to="/blog/new" activeClassName="active-link"><button>new</button></Link>
-                           <i className="fi-cloud style2"></i>
-                       </li>
-                   </ul>
-               </div>
-               <div className="comps">
-                   {this.state.components.map(function(input, index){
-                       return input;
-                   })}
-               </div>
-               <div className="row">
-                   <div className="columns small-12-collapse medium-12-collapse large-12-collpase">
-                       <h3>Blog1 title </h3>
+                <div className="top-bar-right">
+                    <ul className="menu">
+                        <li className="menu-text">
+                            <Link to="/blog/new" activeClassName="active-link"><button>new</button></Link>
+                            <i className="fi-cloud style2"></i>
+                        </li>
+                    </ul>
+                </div>
+                <div className="blog-panel">
+                   <div className="comps">
+                       {this.state.components.map(function(input, index){
+                           return input;
+                       })}
                    </div>
-               </div>
-               <div className="row blog-panel">
-                   <div className="columns large-12">
-                       <img src="http://www.immersion-3d.com/wp-content/uploads/2015/12/image-placeholder-500x500.jpg" alt=""/>
+                   <div className="row">
+                       <div className="columns small-12-collapse medium-12-collapse large-12-collpase">
+                           <h3>Blog1 title </h3>
+                       </div>
                    </div>
-                   <div className="columns large-12 panel-child">
-                       <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                   <div className="row">
+                       <div className="columns large-12">
+                           <img src="http://www.immersion-3d.com/wp-content/uploads/2015/12/image-placeholder-500x500.jpg" alt=""/>
+                       </div>
+                       <div className="columns large-12 panel-child">
+                           <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                       </div>
                    </div>
+                   <hr/>
                </div>
-               <hr/>
-           </div>
+            </div>
         )
     }
 }
