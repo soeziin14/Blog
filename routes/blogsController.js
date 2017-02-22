@@ -6,29 +6,11 @@ var AWS         = require('aws-sdk'),
 module.exports.login = function(req, res){
 
     var {username, password} = req.query;
-    AWS.config.update({
-        region: "us-east-1",
-        endpoint: "dynamodb.us-east-1.amazonaws.com",
-        accessKeyId: aws.ACCESS_KEY,
-        secretAccessKey: aws.SECRET_KEY,
-    });
-    var table       = "User";
-    var docClient = new AWS.DynamoDB.DocumentClient();
-    var params = {
-        TableName:table,
-        KeyConditionExpression: "id = :id",
-        ExpressionAttributeValues: {
-            ":id": username,
-        },
-    };
-   docClient.query(params, function(err, data) {
-       if (err) {
-           console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
-       } else {
-           console.log("Query succeeded.", data.Items);
-           res.status(200).send({data: data.Items});
-       }
-   });
+
+    if(username == "soeziin14"){
+
+        res.send
+    }
 }
 module.exports.getBlog = function(req, res){
     var timestamp = Number(req.params.id);

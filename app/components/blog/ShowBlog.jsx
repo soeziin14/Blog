@@ -9,12 +9,13 @@ class ShowBlog extends React.Component{
         this.state = {
             title: "",
             intro: "",
+            date: "",
             components: [],
             componentData: [],
         }
     }
     componentDidMount = () => {
-         this.getBlog();
+            this.getBlog();
     }
     getBlog = () => {
         //console.log('hey /blog/show/' + this.props.params.id);
@@ -24,10 +25,11 @@ class ShowBlog extends React.Component{
         .then(function(result){
             console.log("result:", result.data);
             var blog = result.data;
-
+            var date = new Date(blog.timestamp).toDateString();
             that.setState({
                 title: blog.title,
                 intro: blog.intro,
+                date: date,
                 componentData: blog.componentData.values,
             });
         })
@@ -57,7 +59,7 @@ class ShowBlog extends React.Component{
                that.setState({
                    components: that.state.components.concat(
                        <div key={that.state.components.length}>
-                           <div className="colums large-12">
+                           <div className="colums large-12 text-center">
                                {imageComponent}
                            </div>
                        </div>
@@ -80,23 +82,24 @@ class ShowBlog extends React.Component{
            }
        })
        console.log(this.state.components);
-   }
+    }
     render(){
         console.log(this.props.location);
         return(
             <div>
-                <div className="row">
-                    <div className="column small-12 large-12 text-center blog-header">
-                        <h1>{this.state.title}</h1>
+                <div className="row blog-panel">
+                    <div className="row blog-title">
+                        <div className="columns small-12-collapse medium-12-collapse large-12-collpase">
+                            <h3>{this.state.title}</h3>
+                            <h5 className="subheader">by Jin @ {this.state.date}</h5>
+                        </div>
                     </div>
-                    <div className="column small-12 large-12 text-center blog-header">
-                        <h3>{this.state.intro}</h3>
-                    </div>
-                    <div className="class column small-12 large-12 text-center blog-header">
-                        {this.state.components.map(function(input, index){
-                            return input;
-                        })}
-                    </div>
+                    <p>{this.state.intro}</p>
+                </div>
+                <div className="components">
+                    {this.state.components.map(function(input, index){
+                       return input;
+                    })}
                 </div>
             </div>
         )

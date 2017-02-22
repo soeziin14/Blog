@@ -5,9 +5,9 @@ var blogs       = require('./routes/blogs.js');
 
 // Create our app
 var app = express();
-//const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-app.listen(process.env.PORT || 3000, function () {
+app.listen(PORT, function () {
   console.log('Express server is up on port ' + PORT);
 });
 
