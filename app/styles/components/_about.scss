@@ -5,8 +5,9 @@ p{
 }
 header{
     text-align: center;
+    margin-bottom: 7.5%;
+    margin-top: 7.5%;
     .header{
-        margin-top: 50px;
     }
     .intro-text{
         padding-top: 7.5%;
@@ -21,6 +22,9 @@ header{
     span{
         font-family: "Open Sans", sans-serif;
     }
+}
+.title{
+    margin-bottom: 7.5%;
 }
 .feature{
     .img-responsive{

@@ -64,8 +64,8 @@ const About = () => {
                 </div>
             </section>
             <hr className="hr-no-padding"/>
-            <section className="success" id="pricing">
-                <div className="columns text-center small-12 medium-12 large-12">
+            <section>
+                <div className="columns text-center small-12 medium-12 large-12 title">
                     <h1 className="section-title">PRICING</h1>
                 </div>
                 <div className="row pricing_options">
@@ -87,13 +87,13 @@ const About = () => {
                         </div>
                     </div>
                 </div>
+                <hr/>
             </section>
             <section id="contact">
-                <div className="row contact_header">
+                <div className="row title">
                     <div className="columns text-center small-12 medium-12 large-12">
                         <h1 className="section-title">About Me</h1>
                     </div>
-                    <hr/>
                 </div>
                 <div className="row">
                     <div className="col-lg-8 col-lg-offset-2 serious_header">
