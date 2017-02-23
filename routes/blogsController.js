@@ -147,6 +147,7 @@ module.exports.getRecentBlogs = function(req, res){
             ":author": author,
         },
         Limit: 10,
+        ScanIndexForward: false,
     };
    docClient.query(params, function(err, data) {
        if (err) {

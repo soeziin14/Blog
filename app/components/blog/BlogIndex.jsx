@@ -44,7 +44,7 @@ class BlogIndex extends React.Component{
        blogs.data.forEach(function(el){
            var formattedTime = new Date(el.timestamp).toDateString();
            var mainImage = that.fetchImageFromS3(el.mainImage);
-           var mainImageComponent = mainImage !== "" ? <img src={mainImage} alt="" className="src"/> :
+           var mainImageComponent = mainImage !== "" ? <img src={mainImage} alt="" className="mainImage"/> :
                                             <img src="http://www.immersion-3d.com/wp-content/uploads/2015/12/image-placeholder-500x500.jpg" alt=""/>;
            that.setState({
                components: that.state.components.concat(

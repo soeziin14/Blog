@@ -58,7 +58,7 @@ class ShowBlog extends React.Component{
                var imageComponent = <img src={image} alt="" className="src"/>
                that.setState({
                    components: that.state.components.concat(
-                       <div key={that.state.components.length}>
+                       <div key={that.state.components.length} className="component">
                            <div className="colums large-12 text-center">
                                {imageComponent}
                            </div>
@@ -67,21 +67,26 @@ class ShowBlog extends React.Component{
                });
            }
            else{
+               var count = 0;
+                console.log("body length", el.length);
+                for(var i=0; i<el.length; i++){
+                    if(el[i] == '\n'){
+                        count++;
+                    }
+                }
+                console.log("how many break:", count);
                that.setState({
                    components: that.state.components.concat(
-                       <div key={that.state.components.length}>
-                           <div className="columns large-12">
-                               <h3>
-                                   {el}
-                               </h3>
-                           </div>
+                       <div key={that.state.components.length} className="columns small-12-collapse medium-12-collapse large-12-collpase component">
+                           <textarea rows={count+1} readOnly>
+                               {el}
+                           </textarea>
                            <hr/>
                        </div>
                    )
                })
            }
        })
-       console.log(this.state.components);
     }
     render(){
         console.log(this.props.location);
