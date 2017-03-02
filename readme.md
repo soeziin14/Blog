@@ -1,6 +1,8 @@
 # JIN's Personal Blog (# a.k.a attempt to learn React & more Javascript)
 
+Currently @ AWS EC2 Instance: http://bloggingjin.us-east-1.elasticbeanstalk.com/#/blog?_k=3rwaq4
 You can check my previous, currently postponed, outdated attempt [here.][df1]
+
 
 # New Features!
 
