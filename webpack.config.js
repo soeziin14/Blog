@@ -23,18 +23,18 @@ module.exports = {
   resolve: {
     root: __dirname,
     alias: {
+        applicationStyles: 'app/styles/app.scss',
         About: 'app/components/About.jsx',
+        AuthService: 'app/auth/AuthService.js',
+        BlogIndex: 'app/components/blog/BlogIndex.jsx',
+        ImageUpload: 'app/components/blog/ImageUpload.jsx',
+        Login: 'app/components/login/Login.jsx',
         Main: 'app/components/Main.jsx',
         Navigation: 'app/components/Navigation.jsx',
-        BlogIndex: 'app/components/blog/BlogIndex.jsx',
         NewBlog: 'app/components/blog/new',
+        Projects: 'app/components/Projects.jsx',
         ShowBlog: 'app/components/blog/ShowBlog.jsx',
-        Login: 'app/components/login/Login.jsx',
-        AuthService: 'app/auth/AuthService.js',
-        applicationStyles: 'app/styles/app.scss',
         TextArea: 'app/components/blog/TextArea.jsx',
-        ImageUpload: 'app/components/blog/ImageUpload.jsx',
-        //Foundation: '../node_modules/foundation-sites/dist/foundation.min.js'
     },
     extensions: ['', '.js', '.jsx']
   },

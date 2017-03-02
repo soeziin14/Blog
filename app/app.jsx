@@ -5,6 +5,7 @@ var React         = require('react'),
 var Main         = require('Main'),
     BlogIndex    = require('BlogIndex'),
     NewBlog      = require('NewBlog'),
+    Projects     = require('Projects'),
     ShowBlog     = require('ShowBlog'),
     About        = require('About'),
     Login        = require('Login');
@@ -19,6 +20,7 @@ ReactDOM.render(
     <Router history={hashHistory}>
         <Route path="/" component={Main}>
             <Route path="/about" component={About}></Route>
+            <Route path="/projects" component={Projects}></Route>
             <Route path="/login" component={Login}></Route>
             <Route path="/blog" component={BlogIndex}></Route>
                 <Route path="/blog/new" component={NewBlog}></Route>

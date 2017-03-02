@@ -16,7 +16,7 @@ var Navigation = () => {
                         <Link to="/blog" activeClassName="active-link">Blog</Link>
                     </li>
                     <li className="menu-text">
-                        <Link to="/countdown" activeClassName="active-link">Projects</Link>
+                        <Link to="/projects" activeClassName="active-link">Projects</Link>
                     </li>
                     <li className="menu-text"></li>
                 </ul>

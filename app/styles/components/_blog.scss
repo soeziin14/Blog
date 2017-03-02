@@ -27,6 +27,7 @@
         font-family: 'Open Sans', Helvetica, Arial, sans-serif;
         font-weight: normal;
         font-size: 1.25rem;
+        margin-bottom: 5%;
     }
     .blog-more{
         text-align: right;
@@ -67,6 +68,12 @@ textarea[readonly]{
 }
 .component{
     margin-bottom: 5%;
+    p{
+        white-space: pre-wrap;
+        margin-left: 5%;
+        margin-right: 5%;
+        font-size: 1.1rem;
+    }
 }
 .imgPreview{
     text-align: center;

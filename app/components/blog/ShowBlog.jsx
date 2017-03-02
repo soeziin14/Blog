@@ -67,20 +67,11 @@ class ShowBlog extends React.Component{
                });
            }
            else{
-               var count = 0;
-                console.log("body length", el.length);
-                for(var i=0; i<el.length; i++){
-                    if(el[i] == '\n'){
-                        count++;
-                    }
-                }
-                console.log("how many break:", count);
+
                that.setState({
                    components: that.state.components.concat(
                        <div key={that.state.components.length} className="columns small-12-collapse medium-12-collapse large-12-collpase component">
-                           <textarea rows={count+1} readOnly>
-                               {el}
-                           </textarea>
+                            <p>{el}</p>
                            <hr/>
                        </div>
                    )
